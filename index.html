@@ -15,329 +15,377 @@
     --card-bg: rgba(10,12,18,0.86);
     --muted: #b1cbe0;
   }
-  html,body{height:100%; margin:0; font-family:Inter, system-ui, sans-serif; color:#e6f8ff;}
-  body {
-    /* fallback gradient (used if bg file not found) */
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Inter, system-ui, sans-serif;
+    color: #e6f8ff;
     background: linear-gradient(135deg,#071021,#0b1220 60%, #071026);
-    background-size:cover;
-    background-position:center;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+    background-size: cover;
+    background-position: center;
   }
 
-  /* overlay so text is readable on background image */
   .bgOverlay {
-    position: fixed; inset:0; pointer-events:none;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
     background: linear-gradient(rgba(2,6,12,0.55), rgba(2,6,12,0.65));
-    z-index:0;
+    z-index: 0;
   }
 
+  /* LOGIN OVERLAY */
+  #loginOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+  }
+
+  #loginBox {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 14px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.7);
+  }
+
+  #loginBox h2 {
+    font-family:'Orbitron', sans-serif;
+    color: var(--accent1);
+    margin-bottom: 20px;
+  }
+
+  #loginBox input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(179,136,255,0.2);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+  }
+
+  #loginError {
+    color: #ff8080;
+    display: none;
+    margin-top: 8px;
+  }
+
+  /* MAIN APP PAGE */
   .page {
-    position:relative;
-    z-index:2;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:36px 20px;
-    box-sizing:border-box;
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
   }
 
   .container {
-    width:100%;
-    max-width:1100px;
-    display:grid;
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap:22px;
-    align-items:start;
+    gap: 22px;
+    align-items: start;
+    justify-items: center; /* center horizontally */
   }
 
-  header{ grid-column:1/-1; text-align:center; margin-bottom:10px;}
-  h1{ font-family: 'Orbitron', sans-serif; margin:0; color:var(--accent1); font-size:36px; text-shadow:0 0 12px rgba(0,255,229,0.12), 0 0 28px rgba(179,136,255,0.06);}
-  p.subtitle{ margin:6px 0 18px; color:var(--accent2); opacity:0.95; font-weight:600; }
+  header {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    color: var(--accent1);
+    font-size: 36px;
+  }
+
+  p.subtitle {
+    margin: 6px 0 18px;
+    color: var(--accent2);
+    opacity: 0.95;
+    font-weight: 600;
+  }
 
   .card {
     background: var(--card-bg);
-    border-radius:14px;
-    padding:20px;
+    border-radius: 14px;
+    padding: 20px;
     box-shadow: 0 6px 30px rgba(2,10,20,0.6);
-    border:1px solid rgba(0,255,229,0.06);
+    border: 1px solid rgba(0,255,229,0.06);
+    width: 100%;
+    max-width: 500px;
   }
 
-  h3{ font-family: 'Orbitron', sans-serif; margin:0 0 12px; color:var(--accent1); font-size:18px; }
+  h3 {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0 0 12px;
+    color: var(--accent1);
+    font-size: 18px;
+  }
 
-  .controls { display:flex; gap:10px; flex-direction:column; }
+  .controls {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
+
   input[type=file] {
-    border-radius:10px; padding:10px; border:1px dashed rgba(179,136,255,0.18);
-    background: rgba(255,255,255,0.02); color:var(--muted); outline:none;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px dashed rgba(179,136,255,0.18);
+    background: rgba(255,255,255,0.02);
+    color: var(--muted);
   }
 
   .btn {
-    border:0; cursor:pointer; padding:10px 14px; border-radius:10px;
-    font-weight:700; color:#071021;
+    border: 0;
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    color: #071021;
     background: linear-gradient(90deg,var(--accent1),var(--accent2));
-    box-shadow: 0 6px 20px rgba(0,255,229,0.06);
   }
-  .btn:active{ transform:translateY(1px); }
+
+  .btn:active {
+    transform: translateY(1px);
+  }
 
   .preview {
-    margin-top:14px;
-    height:260px;
-    border-radius:10px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    display:flex; justify-content:center; align-items:center; overflow:hidden;
-    border:1px solid rgba(179,136,255,0.06);
+    margin-top: 14px;
+    height: 260px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(179,136,255,0.06);
   }
-  .preview img, .preview video { max-width:100%; max-height:100%; display:block; border-radius:8px; }
 
-  .progressOuter{ margin-top:12px; height:12px; background:rgba(255,255,255,0.04); border-radius:12px; overflow:hidden; }
-  .progressInner{ height:100%; width:0%; background: linear-gradient(90deg,var(--accent1),var(--accent2)); transition:width .2s; }
+  .preview img, .preview video, .preview audio {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+  }
 
-  .metrics { display:flex; gap:12px; margin-top:16px; }
-  .metric{ flex:1; padding:14px 8px; background: rgba(0,0,0,0.35); border-radius:10px; text-align:center; border:1px solid rgba(0,255,229,0.04); }
-  .metric p{ margin:0; color:var(--accent2); font-size:13px; }
-  .metric h2{ margin:6px 0 0; color:var(--accent1); font-size:26px; }
+  .progressOuter {
+    margin-top: 12px;
+    height: 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    overflow: hidden;
+  }
 
-  pre#summary { margin-top:14px; background:#07101a; padding:12px; border-radius:8px; color:#cfefff; font-size:13px; border:1px solid rgba(0,255,229,0.03); min-height:100px; }
+  .progressInner {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,var(--accent1),var(--accent2));
+    transition: width .2s;
+  }
 
-  footer { grid-column:1/-1; margin-top:18px; text-align:center; color:var(--accent2); font-size:13px; }
+  .metrics {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
 
-  /* responsive */
-  @media (max-width:900px){
-    .container{ grid-template-columns: 1fr; }
-    h1{ font-size:30px; }
-    .preview{ height:220px; }
+  .metric {
+    flex: 1;
+    padding: 14px 8px;
+    background: rgba(0,0,0,0.35);
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .metric p {
+    margin: 0;
+    color: var(--accent2);
+    font-size: 13px;
+  }
+
+  .metric h2 {
+    margin: 6px 0 0;
+    color: var(--accent1);
+    font-size: 26px;
+  }
+
+  pre#summary {
+    margin-top: 14px;
+    background: #07101a;
+    padding: 12px;
+    border-radius: 8px;
+    color: #cfefff;
+    font-size: 13px;
+    min-height: 100px;
+  }
+
+  footer {
+    grid-column: 1 / -1;
+    margin-top: 18px;
+    text-align: center;
+    color: var(--accent2);
+    font-size: 13px;
   }
 </style>
 </head>
 <body>
-  <div class="bgOverlay"></div>
 
-  <div class="page">
-    <div class="container">
-      <header>
-        <h1>Deepfake Defender</h1>
-        <p class="subtitle">Upload image • video • audio — detect manipulated media</p>
-      </header>
+<div class="bgOverlay"></div>
 
-      <!-- LEFT -->
-      <div class="card">
-        <h3>Upload Media</h3>
-        <div class="controls">
-          <input type="file" id="fileInput" accept="image/*,video/*,audio/*" />
-          <div style="display:flex; gap:10px;">
-            <button class="btn" id="analyzeBtn">Analyze</button>
-            <button class="btn" id="clearBtn" style="background:transparent;color:var(--accent1);border:1px solid rgba(179,136,255,0.14)">Clear</button>
-          </div>
-        </div>
-
-        <div class="preview" id="preview">Preview will appear here</div>
-
-        <div class="progressOuter"><div class="progressInner" id="progressInner"></div></div>
-        <p id="progressText" style="margin-top:8px;color:var(--muted)">Idle</p>
-      </div>
-
-      <!-- RIGHT -->
-      <div class="card">
-        <h3>Results</h3>
-        <div class="metrics">
-          <div class="metric">
-            <p>Safe Probability</p>
-            <h2 id="safePct">—%</h2>
-          </div>
-          <div class="metric">
-            <p>Risk of Fake</p>
-            <h2 id="fakePct">—%</h2>
-          </div>
-        </div>
-
-        <pre id="summary">No analysis yet.</pre>
-      </div>
-
-      <footer>🔒 Cybersecurity Awareness — Trust, but Verify</footer>
-    </div>
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay">
+  <div id="loginBox">
+    <h2>Login<br/>user=admin<br/>password=password123</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button class="btn" id="loginBtn" style="width:100%;margin-top:10px;">Login</button>
+    <p id="loginError">Invalid username or password</p>
   </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="page" id="appContent" style="display:none;">
+  <div class="container">
+    <header>
+      <h1>Deepfake Defender</h1>
+      <p class="subtitle">Upload image • video • audio — detect manipulated media</p>
+    </header>
+
+    <!-- LEFT CARD -->
+    <div class="card">
+      <h3>Upload Media</h3>
+      <div class="controls">
+        <input type="file" id="fileInput" accept="image/*,video/*,audio/*" />
+        <div style="display:flex; gap:10px;">
+          <button class="btn" id="analyzeBtn">Analyze</button>
+          <button class="btn" id="clearBtn" style="background:transparent;color:var(--accent1);border:1px solid rgba(179,136,255,0.14)">Clear</button>
+        </div>
+      </div>
+      <div class="preview" id="preview">Preview will appear here</div>
+      <div class="progressOuter"><div class="progressInner" id="progressInner"></div></div>
+      <p id="progressText" style="margin-top:8px;color:var(--muted)">Idle</p>
+    </div>
+
+    <!-- RIGHT CARD -->
+    <div class="card">
+      <h3>Results</h3>
+      <div class="metrics">
+        <div class="metric"><p>Safe Probability</p><h2 id="safePct">—%</h2></div>
+        <div class="metric"><p>Risk of Fake</p><h2 id="fakePct">—%</h2></div>
+      </div>
+      <pre id="summary">No analysis yet.</pre>
+    </div>
+
+    <footer>🔒 Cybersecurity Awareness — Trust, but Verify</footer>
+  </div>
+</div>
 
 <script>
-/*
-  IMPORTANT:
-  - Put your background image files in the same folder as this HTML, or update the array below to point to correct paths.
-  - Backend upload URL: change BACKEND_URL if your server is at another address.
-*/
+const DEMO_USER="admin", DEMO_PASS="password123";
+const loginBtn=document.getElementById("loginBtn"), loginError=document.getElementById("loginError");
+const loginOverlay=document.getElementById("loginOverlay"), appContent=document.getElementById("appContent");
 
-const bgImages = [
-  // exact filenames you earlier provided — keep them here (spaces/colons allowed)
-  "WhatsApp Image 2025-09-17 at 14.52.17_7fec695d.jpg",
-  "WhatsApp Image 2025-09-17 at 14.52.17_dd205003.jpg",
-  "WhatsApp Image 2025-09-17 at 14.52.16_59af7d88.jpg",
-  "WhatsApp Image 2025-09-17 at 14.52.17_2357f88e.jpg"
-];
-
-// If your server endpoint differs, update this:
-const BACKEND_URL = "http://127.0.0.1:8000/analyze"; // change if needed
-
-// utility to set background (uses encodeURI on filename to avoid issues with spaces)
-function setRandomBackground(){
-  const idx = Math.floor(Math.random()*bgImages.length);
-  const file = bgImages[idx];
-  // encode URI so spaces and special chars are handled
-  const url = `linear-gradient(rgba(2,6,12,0.6), rgba(2,6,12,0.65)), url("${encodeURI(file)}")`;
-  document.body.style.background = url;
-  document.body.style.backgroundSize = "cover";
-  document.body.style.backgroundPosition = "center";
-  console.log("Background set to:", file);
-}
-setRandomBackground();
-
-// --- UI elements ---
-const fileInput = document.getElementById("fileInput");
-const preview = document.getElementById("preview");
-const analyzeBtn = document.getElementById("analyzeBtn");
-const clearBtn = document.getElementById("clearBtn");
-const progressInner = document.getElementById("progressInner");
-const progressText = document.getElementById("progressText");
-const safePct = document.getElementById("safePct");
-const fakePct = document.getElementById("fakePct");
-const summary = document.getElementById("summary");
-
-let uploadedFile = null;
-
-fileInput.addEventListener("change", () => {
-  preview.innerHTML = "";
-  uploadedFile = fileInput.files[0];
-  if(!uploadedFile){
-    preview.textContent = "Preview will appear here";
-    return;
+loginBtn.addEventListener("click",()=>{
+  const u=document.getElementById("username").value, p=document.getElementById("password").value;
+  if(u===DEMO_USER && p===DEMO_PASS){
+    loginOverlay.style.display="none";
+    appContent.style.display="flex"; // show main page
+  } else {
+    loginError.style.display="block";
   }
-  const t = uploadedFile.type;
+});
+
+const BACKEND_URL="http://127.0.0.1:8000/analyze";
+const fileInput=document.getElementById("fileInput"), preview=document.getElementById("preview");
+const analyzeBtn=document.getElementById("analyzeBtn"), clearBtn=document.getElementById("clearBtn");
+const progressInner=document.getElementById("progressInner"), progressText=document.getElementById("progressText");
+const safePct=document.getElementById("safePct"), fakePct=document.getElementById("fakePct"), summary=document.getElementById("summary");
+
+let uploadedFile=null;
+
+fileInput.addEventListener("change",()=>{
+  preview.innerHTML="";
+  uploadedFile=fileInput.files[0];
+  if(!uploadedFile){ preview.textContent="Preview will appear here"; return; }
+  const t=uploadedFile.type;
   if(t.startsWith("image/")){
-    const img = document.createElement("img");
-    img.src = URL.createObjectURL(uploadedFile);
-    img.onload = () => URL.revokeObjectURL(img.src);
+    const img=document.createElement("img");
+    img.src=URL.createObjectURL(uploadedFile);
     preview.appendChild(img);
   } else if(t.startsWith("video/")){
-    const v = document.createElement("video");
-    v.src = URL.createObjectURL(uploadedFile);
-    v.controls = true;
-    v.onloadeddata = () => URL.revokeObjectURL(v.src);
+    const v=document.createElement("video");
+    v.src=URL.createObjectURL(uploadedFile);
+    v.controls=true;
     preview.appendChild(v);
   } else if(t.startsWith("audio/")){
-    const a = document.createElement("audio");
-    a.src = URL.createObjectURL(uploadedFile);
-    a.controls = true;
-    a.onloadeddata = () => URL.revokeObjectURL(a.src);
+    const a=document.createElement("audio");
+    a.src=URL.createObjectURL(uploadedFile);
+    a.controls=true;
     preview.appendChild(a);
   } else {
-    preview.textContent = "Unsupported file type: " + uploadedFile.name;
+    preview.textContent="Unsupported file type: "+uploadedFile.name;
   }
 });
 
-// helper to update UI from backend or simulated data
-function showResult({ safe_pct, fake_pct, summary_text }){
-  safePct.textContent = (typeof safe_pct === "number" ? safe_pct : 0) + "%";
-  fakePct.textContent = (typeof fake_pct === "number" ? fake_pct : 0) + "%";
-  summary.textContent = summary_text || "No summary provided";
+function showResult({safe_pct,fake_pct,summary_text}){
+  safePct.textContent=(safe_pct||0)+"%";
+  fakePct.textContent=(fake_pct||0)+"%";
+  summary.textContent=summary_text||"No summary provided";
 }
 
-// Analyze -> attempt upload using XMLHttpRequest (so we can show upload progress).
-analyzeBtn.addEventListener("click", () => {
-  if(!uploadedFile){ alert("Please upload a file first!"); return; }
-
-  progressInner.style.width = "0%";
-  progressText.textContent = "Preparing upload...";
-  safePct.textContent = "—%";
-  fakePct.textContent = "—%";
-  summary.textContent = "Waiting for analysis...";
-
-  const fd = new FormData();
-  fd.append("file", uploadedFile);
-
-  // Use XHR so we can show upload progress
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", BACKEND_URL, true);
-  xhr.timeout = 20000; // 20s timeout
-
-  xhr.upload.onprogress = (e) => {
+analyzeBtn.addEventListener("click",()=>{
+  if(!uploadedFile){alert("Please upload a file first!");return;}
+  progressInner.style.width="0%"; progressText.textContent="Preparing upload...";
+  safePct.textContent="—%"; fakePct.textContent="—%"; summary.textContent="Waiting for analysis...";
+  const fd=new FormData(); fd.append("file",uploadedFile);
+  const xhr=new XMLHttpRequest(); xhr.open("POST",BACKEND_URL,true); xhr.timeout=20000;
+  xhr.upload.onprogress=(e)=>{
     if(e.lengthComputable){
-      const p = Math.round((e.loaded / e.total) * 100);
-      progressInner.style.width = p + "%";
-      progressText.textContent = `Uploading... ${p}%`;
+      const p=Math.round((e.loaded/e.total)*100);
+      progressInner.style.width=p+"%";
+      progressText.textContent=`Uploading... ${p}%`;
     }
   };
-
-  xhr.onload = () => {
-    if(xhr.status >= 200 && xhr.status < 300){
-      try {
-        const data = JSON.parse(xhr.responseText);
-        // Expecting { safe_pct, fake_pct, summary }
-        showResult({
-          safe_pct: data.safe_pct ?? (100 - (data.fake_pct ?? 0)),
-          fake_pct: data.fake_pct ?? 0,
-          summary_text: data.summary ?? JSON.stringify(data)
-        });
-        progressInner.style.width = "100%";
-        progressText.textContent = "Analysis complete (server)";
-      } catch(err){
-        console.error("Invalid JSON from server:", err, xhr.responseText);
-        simulateFallback(); // fallback to simulated result
-      }
-    } else {
-      console.warn("Server returned status", xhr.status);
-      simulateFallback();
-    }
-  };
-
-  xhr.onerror = () => {
-    console.error("Upload error, falling back to simulated analysis.");
-    simulateFallback();
-  };
-
-  xhr.ontimeout = () => {
-    console.error("Upload timed out, falling back to simulated analysis.");
-    simulateFallback();
-  };
-
-  // send
-  try {
-    xhr.send(fd);
-  } catch(err){
-    console.error("XHR send error:", err);
-    simulateFallback();
-  }
+  xhr.onload=()=>{if(xhr.status>=200&&xhr.status<300){try{const data=JSON.parse(xhr.responseText);
+    showResult({safe_pct:data.safe_pct??(100-(data.fake_pct??0)),fake_pct:data.fake_pct??0,summary_text:data.summary??JSON.stringify(data)});
+    progressInner.style.width="100%"; progressText.textContent="Analysis complete (server)";}
+    catch(err){simulateFallback();}} else{simulateFallback();}};
+  xhr.onerror=()=>simulateFallback(); xhr.ontimeout=()=>simulateFallback();
+  try{xhr.send(fd);}catch(err){simulateFallback();}
 });
 
-// fallback simulated analysis (used if server not reachable)
 function simulateFallback(){
-  let progress = 0;
-  progressInner.style.width = "0%";
-  progressText.textContent = "Analyzing (local simulation)...";
-  const timer = setInterval(()=>{
-    progress += Math.floor(Math.random()*12) + 6; // random steps
-    if(progress > 100) progress = 100;
-    progressInner.style.width = progress + "%";
-    progressText.textContent = `Analyzing... ${progress}%`;
-    if(progress >= 100){
-      clearInterval(timer);
-      const fakeRisk = uploadedFile && uploadedFile.type.startsWith("video/") ? Math.floor(Math.random()*60+20) :
-                       uploadedFile && uploadedFile.type.startsWith("image/") ? Math.floor(Math.random()*40+20) :
-                       Math.floor(Math.random()*50+30);
-      showResult({ safe_pct: 100 - fakeRisk, fake_pct: fakeRisk, summary_text:
-        `File Name: ${uploadedFile.name}\nType: ${uploadedFile.type}\nAnalysis (simulated):\nFacial & lip-sync: simulated ✓\nMetadata check: simulated ✓\nConfidence (demo): ${100-fakeRisk}%`
-      });
-      progressText.textContent = "Analysis complete (simulated)";
+  let progress=0; progressInner.style.width="0%"; progressText.textContent="Analyzing (simulated)...";
+  const timer=setInterval(()=>{
+    progress+=Math.floor(Math.random()*12)+6; if(progress>100)progress=100;
+    progressInner.style.width=progress+"%"; progressText.textContent=`Analyzing... ${progress}%`;
+    if(progress>=100){clearInterval(timer);
+      const fakeRisk=uploadedFile&&uploadedFile.type.startsWith("video/")?Math.floor(Math.random()*60+20)
+        :uploadedFile&&uploadedFile.type.startsWith("image/")?Math.floor(Math.random()*40+20)
+        :Math.floor(Math.random()*50+30);
+      showResult({safe_pct:100-fakeRisk,fake_pct:fakeRisk,
+        summary_text:`File: ${uploadedFile.name}\nType: ${uploadedFile.type}\nAnalysis (simulated)`});
+      progressText.textContent="Analysis complete (simulated)";
     }
-  }, 220);
+  },220);
 }
 
-clearBtn.addEventListener("click", () => {
-  fileInput.value = "";
-  uploadedFile = null;
-  preview.innerHTML = "Preview will appear here";
-  progressInner.style.width = "0%";
-  progressText.textContent = "Idle";
-  safePct.textContent = "—%";
-  fakePct.textContent = "—%";
-  summary.textContent = "No analysis yet.";
+clearBtn.addEventListener("click",()=>{
+  fileInput.value=""; uploadedFile=null; preview.innerHTML="Preview will appear here";
+  progressInner.style.width="0%"; progressText.textContent="Idle";
+  safePct.textContent="—%"; fakePct.textContent="—%"; summary.textContent="No analysis yet.";
 });
 </script>
 </body>
